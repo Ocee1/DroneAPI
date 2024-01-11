@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",
+      "module": "CommonJS",
+      "outDir": "dist",
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "pretty": true,
+      "strict": true,
+      "esModuleInterop": true
+    },
+    "include": [
+        "src/**/*.ts",
+        ".env"
+    ],
+    "typeRoots": [
+        "node_modules/@types"
+    ],
+    "exclude": ["node_modules"]
+  }
+  
