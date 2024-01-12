@@ -5,10 +5,18 @@ export interface IDrone extends Document {
     droneModel: string, 
     weight: number,
     battery: string,
-    state: string 
+    state: string,
+    medications: []
 }
 
-const schema = new Schema({
+export interface IMedication extends Document{
+    name: string,
+    weight: number,
+    code: string,
+    image: string
+}
+
+const droneSchema = new Schema({
     serialNumber: {
         type: String,
         maxLength: 100,
@@ -44,11 +52,37 @@ const schema = new Schema({
         ],
         default: 'IDLE'
     },
-    medications: {
-        type: Schema.Types.ObjectId,
-        ref: 'medications'
-    }
+    medications: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'medications'
+        }
+    ]
 
 });
 
-export default model<IDrone>('Drone', schema);
+const medSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    weight: {
+        type: Number,
+        required: true
+    },
+    code: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+});
+
+
+
+export default {
+    Drone: model<IDrone>('Drone', droneSchema),
+    Medications: model<IMedication>('Medication', medSchema)
+};
