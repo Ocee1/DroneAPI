@@ -12,7 +12,7 @@
     "include": [
         "src/**/*.ts",
         ".env"
-    ],
+, "src/utils/battery_check_job.ts"    ],
     "typeRoots": [
         "node_modules/@types"
     ],

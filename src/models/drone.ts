@@ -6,7 +6,7 @@ export interface IDrone extends Document {
     weight: number,
     battery: string,
     state: string,
-    medications: []
+    medications?: []
 }
 
 export interface IMedication extends Document{
