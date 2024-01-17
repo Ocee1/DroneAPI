@@ -36,25 +36,19 @@ Follow these steps to run the DroneAPI locally
 - MONGODB_ur=mongodb://localhost/your-local-database
 
 4. Run the Application
-- npm  
+- npm start
 
 ### DB
 Connect to Mongodb locally through a docker image or setup mongodb locally
 
 
-
-
-
-Installation: Provide clear instructions on how to install dependencies and set up the API environment.
-Configuration: Explain any necessary configuration steps, such as database setup.
-Running the API: Describe how to start the API server.
-Documentation: Link to the API documentation for detailed information on endpoints and usage.
-
-## Contributing
-
-Outline guidelines for contributing to the project, including code contributions, testing, and documentation.
-Refer to a CONTRIBUTING file for detailed instructions.
 ## Endpoints
 
-List the available API endpoints, their HTTP methods, and brief descriptions.
-Consider using a table format for clarity.
+| Endpoint                           | Method | Description                                            |
+|------------------------------------|--------|--------------------------------------------------------|
+| `/drones`                          | POST   | Register a new drone.                                  |
+| `/drones/:serialNumber/medications`| PUT    | Load medications onto a specific drone.                |
+| `/drones/:serialNumber/medications`| GET    | Retrieve loaded medications for a specific drone.      |
+| `/drones?state=IDLE`               | GET    | Retrieve a list of drones in IDLE state.               |
+| `/drones/:serialNumber/battery`    | GET    | Retrieve battery level information for a specific drone.|
+
