@@ -1,6 +1,9 @@
 "use strict";
-// import { connect } from "mongoose";
-// const Mongo_uri = 'mongodb://localhost:27017/droneDB'
-// const connectDB = (): Promise<typeof import('mongoose')> => connect(Mongo_uri);
-// export default connectDB;
+Object.defineProperty(exports, "__esModule", { value: true });
+const testConfig = {
+    port: 3000,
+    MONGO_URI: process.env.TEST_DB,
+    // Other development-specific configurations
+};
+exports.default = testConfig;
 //# sourceMappingURL=test.js.map

@@ -28,6 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
 const config_1 = __importDefault(require("./config"));
+const battery_check_job_1 = require("./utils/battery_check_job");
 class App {
     constructor(routes) {
         this.app = (0, express_1.default)();
@@ -41,6 +42,9 @@ class App {
         this.app.listen(this.port, () => {
             console.log(`Server is listening on port ${this.port}`);
         });
+    }
+    batteryCheckTask() {
+        (0, battery_check_job_1.batteryCheck)();
     }
     getServer() {
         return this.app;

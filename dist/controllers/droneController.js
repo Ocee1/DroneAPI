@@ -37,8 +37,8 @@ class DroneController {
                     battery,
                     state,
                 };
-                await this.services.registerDrone(drone);
-                res.status(201).json({ message: 'Drone added successfully', drone });
+                const result = await this.services.registerDrone(drone);
+                res.status(201).json({ message: 'Drone added successfully', result });
             }
             catch (error) {
                 console.log(error.message);
