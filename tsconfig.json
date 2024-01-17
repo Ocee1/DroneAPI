@@ -7,7 +7,8 @@
       "sourceMap": true,
       "pretty": true,
       "strict": true,
-      "esModuleInterop": true
+      "esModuleInterop": true,
+      "types": ["node", "jest", "superagent"],
     },
     "include": [
         "src/**/*.ts",

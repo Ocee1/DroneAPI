@@ -1,5 +1,7 @@
 import { Router } from "express";
 import DroneController from "../controllers/droneController";
+import DroneServices from "../services/droneService";
+
 
 interface IRoutes {
     router: Router
@@ -13,7 +15,7 @@ class DroneRouter implements IRoutes {
         this.initializeRoutes();
     }
 
-    protected initializeRoutes  () {
+    private initializeRoutes  () {
         this.router.post('/drones', this.droneController.registerDrone);
         this.router.put('/drones/:serialNumber/medications', this.droneController.loadMed);
         this.router.get('/drones/:serialNumber/medications', this.droneController.getLoadedMedsForDrone);

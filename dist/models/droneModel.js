@@ -1,35 +1,20 @@
-import { Schema, model, Document } from "mongoose";
-
-export interface IDrone extends Document {
-    serialNumber: string,
-    droneModel: string, 
-    weight: number,
-    battery: string,
-    state: string,
-    medications?: []
-}
-
-export interface IMedication extends Document{
-    name: string,
-    weight: number,
-    code: string,
-    image: string
-}
-
-const droneSchema = new Schema({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = require("mongoose");
+const droneSchema = new mongoose_1.Schema({
     serialNumber: {
         type: String,
         maxLength: 100,
+        required: true
+    },
+    droneModel: {
+        type: String,
         enum: [
             'Lightweight',
             'Middleweight',
             'Cruiserweight',
             'Heavyweight'
         ],
-        required: true
-    },
-    droneModel: {
-        type: String,
         required: true
     },
     weight: {
@@ -54,14 +39,12 @@ const droneSchema = new Schema({
     },
     medications: [
         {
-            type: Schema.Types.ObjectId,
+            type: mongoose_1.Schema.Types.ObjectId,
             ref: 'medications'
         }
     ]
-
 });
-
-const medSchema = new Schema({
+const medSchema = new mongoose_1.Schema({
     name: {
         type: String,
         required: true
@@ -76,13 +59,10 @@ const medSchema = new Schema({
     },
     image: {
         type: String,
-        required: true
     },
 });
-
-
-
-export default {
-    Drone: model<IDrone>('Drone', droneSchema),
-    Medications: model<IMedication>('Medication', medSchema)
+exports.default = {
+    Drone: (0, mongoose_1.model)('Drone', droneSchema),
+    Medications: (0, mongoose_1.model)('Medication', medSchema)
 };
+//# sourceMappingURL=droneModel.js.map

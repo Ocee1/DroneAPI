@@ -1,4 +1,4 @@
-import drone from "../models/drone";
+import drone from "../models/droneModel";
 
 
 class DroneServices {

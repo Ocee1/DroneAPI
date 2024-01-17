@@ -2,12 +2,15 @@ import { Request, Response, NextFunction } from "express";
 import DroneServices from "../services/droneService";
 
 class DroneController {
-    constructor () {}
+    
+    constructor () {
+       
+    }
     protected services = new DroneServices();
 
     public registerDrone = async (req: Request, res: Response, next: NextFunction) => {
         const { 
-            serialNum,
+            serialNumber,
             droneModel,
             weight,
             battery,
@@ -15,7 +18,11 @@ class DroneController {
         } = req.body;
         
         try {
-            if (!serialNum || serialNum.length > 100) {
+            const existingDrone = await this.services.getDrone(serialNumber);
+            if (existingDrone) {
+                return res.status(400).json({ message: 'Drone already exists!' });
+            };
+            if (!serialNumber || serialNumber.length > 100) {
                 return res.status(400).json({message: 'Invalid Serial number'});
             }
 
@@ -35,28 +42,28 @@ class DroneController {
             }
 
             const drone = {
-                serialNum,
+                serialNumber,
                 droneModel,
                 weight,
                 battery,
                 state,
             }
 
-            await this.services.registerDrone(drone);
+            const result = await this.services.registerDrone(drone);
 
-            res.status(201).json(drone);
+            res.status(201).json({ message: 'Drone added successfully', result});
         } catch (error: any) {
-            console.error;
-            res.status(400).json({ message: 'Error registering drone' });
+            console.log(error.message);
+            res.status(400).json({ message: 'Error registering drone',  });
         }
     }
 
     public loadMed = async (req: Request, res:Response) => {
         const { medications } = req.body;
-        const { serialNum } = req.params;
+        const { serialNumber } = req.params;
         
         try {
-            const drone = await this.services.getDrone(serialNum);
+            const drone = await this.services.getDrone(serialNumber);
             if (!drone) {
                 return res.status(404).json({ message: 'Drone not found' });
             }
@@ -98,10 +105,10 @@ class DroneController {
     }
 
     public getLoadedMedsForDrone = async (req: Request, res: Response) => {
-        const { serialNum } = req.params;
+        const { serialNumber } = req.params;
 
         try {
-            const drone = await this.services.getDrone(serialNum);
+            const drone = await this.services.getDrone(serialNumber);
             if (!drone) {
                 return res.status(404).json({message: 'Drone not found!'})
             }
@@ -125,9 +132,9 @@ class DroneController {
     }
 
     public droneBattery = async (req: Request, res: Response) => {
-        const { serialNum } = req.params;
+        const { serialNumber } = req.params;
         try {
-            const drone = await this.services.getDrone(serialNum);
+            const drone = await this.services.getDrone(serialNumber);
             if (!drone) {
                 return res.status(404).json({message: 'Drone not found'});
             }
